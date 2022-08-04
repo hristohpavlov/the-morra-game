@@ -1,0 +1,64 @@
+@import '~bulma/bulma';
+
+:root {
+  --shadowDark: #e1c3b2;
+  --shadowLight: #e9cbb9;
+  --brandColor: hsl(4, 73%, 54%);
+  --background: #ffd3a2;
+  --textDark: hsla(0, 0%, 0%, 0.66);
+  --textLight: hsla(0, 0%, 0%, 0.33);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--textDark);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  background: var(--shadowLight) !important;
+  font-size: 16px;
+}
+
+input:focus {
+  border-color: var(--brandColor) !important;
+  box-shadow: 0 0 0 1px var(--brandColor) !important;
+}
+
+button {
+  background-color: var(--brandColor) !important;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  // background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+}
