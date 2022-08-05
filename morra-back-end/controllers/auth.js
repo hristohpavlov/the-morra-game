@@ -1,4 +1,5 @@
 import { User } from "../models/User.js";
+import ErrorResponse from "../utils/errorResponse.js";
 
 export async function register(req, res, next) {
     const { username, email, password } = req.body;
@@ -10,12 +11,9 @@ export async function register(req, res, next) {
         res.status(201).json({
             success: true,
             user
-        })
+        });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: errror.message,
-        })
+        next(error);
     }
 };
 
@@ -23,20 +21,18 @@ export async function login(req, res, next) {
     const { email, password } = req.body;
 
     if(!email || !password) {
-        res.status(400).json({
-            success: false, error: "Please provide email and password"
-        })
+        return next(new ErrorResponse("Please provide email and password", 400))
     }
     try {
         const user = await User.findOne({ email }).select("+password")
 
         if(!user){
-            res.status(404).json({success: false, error: "Invalid Credentials"})
+            return next(new ErrorResponse("Invalid Credentials", 401))
         }
 
         const isMatch = await user.matchPasswords(password);
         if(!isMatch) {
-            res.status(404).json({success: false, error: "Invalid Credentials"})
+            return next(new ErrorResponse("Invalid Password",401))
         }
 
         res.status(200).json({
