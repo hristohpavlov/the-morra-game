@@ -8,10 +8,7 @@ export async function register(req, res, next) {
             username, email, password
         });
 
-        res.status(201).json({
-            success: true,
-            user
-        });
+        sendToken(user, 201, res);
     } catch (error) {
         next(error);
     }
@@ -35,10 +32,7 @@ export async function login(req, res, next) {
             return next(new ErrorResponse("Invalid Password",401))
         }
 
-        res.status(200).json({
-            success: true,
-            token: "ja9d8uanqji"
-        })
+        sendToken(user, 200, res);
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
@@ -50,4 +44,9 @@ export function forgotpassword(req, res, next) {
 
 export function resetpassword(req, res, next) {
     res.send("Reset Password");
+}
+
+const sendToken = (user, statusCode, res) => {
+    const token = user.getSignedToken();
+    res.status(statusCode).json({success: true, token})
 }
