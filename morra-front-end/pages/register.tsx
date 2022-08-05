@@ -1,26 +1,49 @@
 import classNames from "classnames";
 import { useState } from "react";
 import { URL } from "../utils/url";
+import axios, {AxiosRequestConfig} from 'axios';
 import styles from '../styles/Register.module.scss';
+import { useRouter } from "next/router";
 
 export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const router = useRouter();
     async function registerUser(event:any){
         event.preventDefault();
-        fetch('http://localhost:5000/api/auth/register', {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json',
+        const config = {
+            headers: {
+                "Content-Type" : "application/json",
+            }
+        }
+        
+        if(password !== confirmPassword) {
+            setPassword("");
+            setConfirmPassword("");
+            setTimeout(() => {
+                setError("");
+            }, 5000);
+            return setError("Passwords do not match");
+        }
+
+        try {
+            const {data} = await axios.post(`${URL}/api/auth/register`, 
+            {
+                username:name,
+                email: email,
+                password: password,
             },
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-            }),
-        })
+            config);
+            localStorage.setItem("authToken", data.token);
+        } catch (error:any) {
+            setError(error?.response?.data?.error);
+            setTimeout(() => {
+                setError("");
+            }, 5000)
+        }
     }
 
     return (
@@ -32,28 +55,28 @@ export default function Register() {
                         <br />
                         <div className="field">
                             <div className="control">
-                                <input className={classNames("input is-medium is-rounded", styles.input)} type="username" placeholder="Username" autoComplete="username" required 
+                                <input className={classNames("input is-medium is-rounded", styles.input)} type="username" placeholder="Username" id="username" value={name} autoComplete="username" required 
                                 onChange={(e) => setName(e.target.value)}/>
                             </div>
                         </div>
                         <br />
                         <div className="field">
                             <div className="control">
-                                <input className={classNames("input is-medium is-rounded", styles.input)} type="email" placeholder="E-mail" autoComplete="username" required 
+                                <input className={classNames("input is-medium is-rounded", styles.input)} type="email" placeholder="E-mail" id="email" value={email} autoComplete="username" required 
                                 onChange={(e) => setEmail(e.target.value)}/>
                             </div>
                         </div>
                         <br />
                         <div className="field">
                             <div className="control">
-                                <input className={classNames("input is-medium is-rounded", styles.input)} type="password" placeholder="Password" required 
+                                <input className={classNames("input is-medium is-rounded", styles.input)} type="password" id="password" value={password} placeholder="Password" required 
                                 onChange={(e) => setPassword(e.target.value)}/>
                             </div>
                         </div>
                         <br />
                         <div className="field">
                             <div className="control">
-                                <input className={classNames("input is-medium is-rounded", styles.input)} type="password" placeholder="Confirm Password" required 
+                                <input className={classNames("input is-medium is-rounded", styles.input)} type="password" id="confirmpassword" value={confirmPassword} placeholder="Confirm Password" required 
                                 onChange={(e) => setConfirmPassword(e.target.value)}/>
                             </div>
                         </div>
