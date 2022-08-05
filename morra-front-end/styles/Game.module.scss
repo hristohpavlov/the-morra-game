@@ -1,0 +1,90 @@
+.parallax {
+    padding-top: 65%;
+    perspective: 100px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: -20%;
+    right: 0;
+    bottom: 0;
+}
+
+.parallax_layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.parallax_layer img {
+    object-fit: cover;
+    width: 85%;
+    margin-left: 16%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+
+.parallax_cover {
+    background-color: #321126;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    top: 98.9%;
+    left: 0;
+    right: 0;
+    min-height: 175%;
+}
+
+.parallax_layer_0 {
+    transform: translateZ(-450px) scale(5.5);
+}
+
+.parallax_layer_1 {
+    transform: translateZ(-400px) scale(5);
+}
+
+.parallax_layer_2 {
+    transform: translateZ(-350px) scale(4.5);
+}
+
+.parallax_layer_3 {
+    transform: translateZ(-300px) scale(4);
+}
+
+.parallax_layer_4 {
+    transform: translateZ(-250px) scale(3.5);
+}
+
+.parallax_layer_5 {
+    transform: translateZ(-200px) scale(3);
+}
+
+.parallax_layer_6 {
+    transform: translateZ(-150px) scale(2.5);
+}
+
+.parallax_layer_7 {
+    transform: translateZ(-100px) scale(2);
+}
+
+.parallax_layer_8 {
+    transform: translateZ(-50px) scale(1.5);
+}
+
+.parallax_layer_9 {
+    z-index: 2 !important;
+    transform: translateZ(0px) scale(1);
+}
+
+.container__juicer {
+    margin-top: 20%;
+    margin-left: 21%;
+    margin-right: 5%;
+}

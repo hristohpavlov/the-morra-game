@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.scss';
+import styles from '../styles/Game.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getUserState, setEmail, setName } from '../store/slices/userSlice';
 import { useState } from 'react';
 import classNames from 'classnames';
 
-const Home: NextPage = () => {
+const Game: NextPage = () => {
     const dispatch = useAppDispatch();
     const user = useAppSelector(getUserState);
 
@@ -48,13 +48,13 @@ const Home: NextPage = () => {
                         <div id="navbarExampleTransparentExample" className={isActive ? "navbar-menu is-active" : "navbar-menu"}>
 
                             <div className="navbar-end">
-                                <a className="navbar-item is-active" href="/">
+                                <a className="navbar-item" href="/">
                                     Home
                                 </a>
-                                <a className="navbar-item" href="/game">
+                                <a className="navbar-item is-active" href="/game">
                                     Game
                                 </a>
-                                <a className="navbar-item" href="/highscores">
+                                <a className="navbar-item" href="/highschores">
                                     Highscores
                                 </a>
                                 <a className="navbar-item" href="/profile">
@@ -69,24 +69,6 @@ const Home: NextPage = () => {
                             </div>
                         </div>
                     </nav>
-                </div>
-                <div className={classNames("has-text-centered", styles.animated_text)}>
-                    <div>
-                        <span>T</span>
-                        <span>H</span>
-                        <span>E</span>
-                        <span>&nbsp;</span>
-                        <span>M</span>
-                        <span>O</span>
-                        <span>R</span>
-                        <span>R</span>
-                        <span>A</span>
-                        <span>&nbsp;</span>
-                        <span>G</span>
-                        <span>A</span>
-                        <span>M</span>
-                        <span>E</span>
-                    </div>
                 </div>
                 <div className={classNames("hero-body", styles.container)}>
                     <div className={classNames("parallax", styles.parallax)}>
@@ -122,7 +104,7 @@ const Home: NextPage = () => {
                         </div>
                         <div className={classNames("parallax_cover", styles.parallax_cover)}>
                             <div className={classNames(" is-multiline columns is-centered container__juicer", styles.container__juicer)}>
-                                Rules, hyperlinks, history plus the game
+                                THE ACTUAL GAME
                             </div>
                         </div>
                     </div>
@@ -132,4 +114,4 @@ const Home: NextPage = () => {
     );
 };
 
-export default Home;
+export default Game;
