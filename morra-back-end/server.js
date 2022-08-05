@@ -4,9 +4,9 @@ import cors from 'cors';
 import router from './routes/auth.js';
 import privateRoute from './routes/private.js';
 import connectToDB from './config/db.js';
-import {errorHandler} from './middleware/error.js';
+import { errorHandler } from './middleware/error.js';
 
-dotenv.config({path: "./config.env"});
+dotenv.config({ path: "./config.env" });
 
 connectToDB();
 
@@ -17,11 +17,10 @@ app.use(cors());
 
 app.use('/api/auth', router);
 app.use('/api/private', privateRoute);
-
 //Last middleware should be errorHandler
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 6969;
+const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 

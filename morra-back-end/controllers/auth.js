@@ -34,7 +34,7 @@ export async function login(req, res, next) {
             return next(new ErrorResponse("Invalid Password",401))
         }
 
-        sendToken(user, 200, res);
+        sendLoginToken(user, 200, res);
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
@@ -54,12 +54,12 @@ export async function forgotpassword(req, res, next) {
     
         await user.save();
 
-        const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+        const resetUrl = `${process.env.WEBSITE_URL}/passwordreset/${resetToken}`;
 
         const message = `
             <h1>You have requested to reset your password</h1>
             <p>Follow this link, to reset your password</p>
-            <a href=${resetUrl} clicktracking=off>Reset password</a>
+            <a href=${resetUrl} clicktracking=off>Reset password link</a>
         `
 
         try {
@@ -112,4 +112,9 @@ export async function resetpassword(req, res, next) {
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedToken();
     res.status(statusCode).json({success: true, token})
+}
+
+const sendLoginToken = (user, statusCode, res) => {
+    const token = user.getSignedToken();
+    res.status(statusCode).json({success: true, token, username: user.username})
 }
